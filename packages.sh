@@ -38,40 +38,11 @@ then
     echo "removing jfrog archive"
     sudo rm jfrog-rpm-installer.tar.gz
 
-    if [[ -f "$S3_BIN/pipelines-1.19.3.tar.gz" ]]
-    then
-      # docker needed for pipelines
-        sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-        sudo yum install -y docker-ce docker-ce-cli containerd.io
-        sudo systemctl start docker
-        sudo systemctl enable docker
-
-       echo "files of pipelines found, proceed"
-       sudo cp $S3_BIN/pipelines-1.19.3.tar.gz $JFROG_HOME
-       cd $JFROG_HOME
-       sudo tar zxvf pipelines-1.19.3.tar.gz 
-       # ? check whether it's there already 
-       echo "removing pipelines archive"
-       sudo rm pipelines-1.19.3.tar.gz 
-       sudo mv pipelines-1.19.3 pipelines
-
-       cd pipelines
-
-       TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
-       IPA=`curl -H "X-aws-ec2-metadata-token: $TOKEN" -v http://169.254.169.254/latest/meta-data/local-ipv4`
-
-       ./pipelines install --base-url-ui http://$JFROG_URL:8081 \
-               --artifactory-joinkey "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE" \
-               --installer-ip $IPA \
-               --api-url http://$JFROG_URL:8081/artifactory/api/
-
-    fi
-
-        echo "removing secrets and unwanted stuff..."
-        sudo umount $S3_BIN
-        sudo rm -rf $S3_BIN   
-        sudo rm /etc/passwd-s3fs
-        sudo rm -rf /home/centos/s3fs-*
+    echo "removing secrets and unwanted stuff..."
+    sudo umount $S3_BIN
+    sudo rm -rf $S3_BIN   
+    sudo rm /etc/passwd-s3fs
+    sudo rm -rf /home/centos/s3fs-*
 
   else
 
