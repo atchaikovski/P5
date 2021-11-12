@@ -2,7 +2,7 @@ region                     = "us-east-1"
 instance_type              = "c3.large"
 enable_detailed_monitoring = true
 
-#allowed_ports = ["80", "443", "8000-8100"]
+#allowed_ports = ["80", "443", "8040-8090"]
 
 common_tags = {
   Owner       = "Alex Tchaikovski"
@@ -12,4 +12,5 @@ common_tags = {
 
 
 jfrog_host_name = "jfrog"
-linux_host_name = "nginx"
+nginx_host_name = "nginx"
+win_host_name = "windows"

@@ -3,13 +3,13 @@
 #}
 
 output "jfrog_instance_id" {
-  value = aws_instance.artifactory_server.id
+  value = aws_instance.jfrog_server.id
 }
 
 output "jfrog_sg_id" {
-  value = aws_security_group.artifactory_server.id
+  value = aws_security_group.jfrog_server.id
 }
 
 output "tchaikovski-public-zone-id" {
-  value = "Z05468452AW2YM7B8G3IP"
+  value = ""
 }

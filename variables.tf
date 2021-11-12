@@ -36,7 +36,17 @@ variable "domain_tchaikovski_link" {
   default = "tchaikovski.link"
 }
 
-variable "host_name" {
+variable "jfrog_host_name" {
   type = string
   default = "jfrog"
+}
+
+variable "nginx_host_name" {
+  type = string
+  default = "nginx"
+}
+
+variable "win_host_name" {
+  type = string
+  default = "windows"
 }
