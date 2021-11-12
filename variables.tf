@@ -8,7 +8,13 @@ variable "region" {
 variable "instance_type" {
   description = "Instance Type"
   type        = string
-  default     = "c3.large"
+  default     = "t2.medium"
+}
+
+variable "nginx_instance_type" {
+  description = "Instance Type"
+  type        = string
+  default     = "t2.small"
 }
 
 variable "allowed_ports" {

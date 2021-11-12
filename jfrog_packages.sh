@@ -36,7 +36,8 @@ then
     sudo systemctl start xray.service
 
     echo "removing jfrog archive"
-    sudo rm jfrog-rpm-installer.tar.gz
+    sudo rm /opt/jfrog/artifactory/artifactory.rpm
+    sudo rm /opt/jfrog-rpm-installer*
 
     echo "removing secrets and unwanted stuff..."
     sudo umount $S3_BIN

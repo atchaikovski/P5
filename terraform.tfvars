@@ -1,8 +1,7 @@
 region                     = "us-east-1"
+nginx_instance_type        = "t2.micro"
 instance_type              = "t2.medium"
 enable_detailed_monitoring = true
-
-#allowed_ports = ["80", "443", "8040-8090"]
 
 common_tags = {
   Owner       = "Alex Tchaikovski"
