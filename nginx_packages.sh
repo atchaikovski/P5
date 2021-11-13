@@ -3,27 +3,22 @@
 # script for the Nginx thing
 set -ex
 
+# SELINUX
+sudo setenforce 0
+
 # EPEL
 sudo yum install -y -q epel-release
 
 # NGINX
 sudo yum install -y -q nginx
 sudo systemctl enable nginx
-sudo systemctl start nginx
-sudo cp ~/nginx.conf /etc/nginx/conf.d/default.conf
+
+# configuring NGINX
+sudo mkdir /etc/nginx/ssl
+sudo chmod 644 /etc/nginx/ssl
 sudo cp ./server.crt /etc/nginx/ssl/server.crt
 sudo cp ./server.key /etc/nginx/ssl/server.key
+sudo cp ./nginx.conf /etc/nginx/nginx.conf
 
-# SNAPD
-sudo yum install -y -q snapd
-sudo systemctl enable --now snapd.socket
-sudo ln -s /var/lib/snapd/snap /snap
-sleep 60
-
-# CERTBOT
-sudo snap install core 
-sudo snap refresh core
-sudo snap install --classic certbot
-sudo ln -s /snap/bin/certbot /usr/bin/certbot
-#sudo certbot certonly --nginx
-sudo certbot --nginx
+sudo systemctl start nginx
+sudo cp ./mynginx.conf /etc/nginx/conf.d/default.conf

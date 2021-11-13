@@ -33,7 +33,7 @@ then
 
     echo "starting as a service"
     sudo systemctl start artifactory.service
-    sudo systemctl start xray.service
+#    sudo systemctl start xray.service
 
     echo "removing jfrog archive"
     sudo rm /opt/jfrog/artifactory/artifactory.rpm
