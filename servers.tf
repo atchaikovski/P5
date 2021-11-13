@@ -10,7 +10,7 @@ resource "aws_instance" "jfrog_server" {
   #user_data                   = "${file("packages.sh")}"
   
     provisioner "file" {
-      source      = "${path.module}/passwd-s3fs"
+      source      = "${path.module}/secrets/passwd-s3fs"
       destination = "passwd-s3fs"
  
       connection {
@@ -22,7 +22,7 @@ resource "aws_instance" "jfrog_server" {
     } 
 
     provisioner "file" {
-      source      = "${path.module}/jfrog_packages.sh"
+      source      = "${path.module}/scripts/jfrog_packages.sh"
       destination = "packages.sh"
       
       connection {
