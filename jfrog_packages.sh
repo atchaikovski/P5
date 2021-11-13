@@ -8,7 +8,7 @@ echo "what is in JFROG_HOME?  "$JFROG_HOME
 
 export S3_BIN=/opt/s3
 export S3_BUCKET=sf-project4-binaries
-export JFROG_URL="${host_name}.tchaikovski.link"
+export JFROG_URL="jfrog.tchaikovski.link"
 
 echo $JFROG_URL
 

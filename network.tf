@@ -9,6 +9,7 @@ locals {
 }
 
 ### SG for artifactory
+
 resource "aws_security_group" "jfrog_server" {
   name = "JFrog Security Group"
 
@@ -56,7 +57,6 @@ resource "aws_security_group" "nginx_server" {
 #         ipv6_cidr_blocks = [data.aws_vpc.default.cidr_block]      
        }
     }
-
 
   egress {
       from_port        = 0

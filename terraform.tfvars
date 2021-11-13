@@ -5,10 +5,9 @@ enable_detailed_monitoring = true
 
 common_tags = {
   Owner       = "Alex Tchaikovski"
-  Project     = "Jenkins + JFrog"
-  Purpose     = "HTTPS for JFrog"
+  Project     = "Artifactory JFrog"
+  Purpose     = "SF Project 5"
 }
-
 
 jfrog_host_name = "jfrog"
 nginx_host_name = "nginx"

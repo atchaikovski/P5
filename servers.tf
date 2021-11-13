@@ -1,4 +1,5 @@
 ### Artifactory server
+
 resource "aws_instance" "jfrog_server" {
   ami                         = "ami-0affd4508a5d2481b"
   instance_type               = var.instance_type
@@ -53,7 +54,7 @@ resource "aws_instance" "jfrog_server" {
 
 }
 
-
+### NGINX server
 resource "aws_instance" "nginx_server" {
   ami                         = "ami-0affd4508a5d2481b"
   instance_type               = var.nginx_instance_type
@@ -63,25 +64,13 @@ resource "aws_instance" "nginx_server" {
   associate_public_ip_address = true
   
     provisioner "file" {
-      source      = "${path.module}/nginx.conf"
-      destination = "nginx.conf"
+      source      = "${path.module}/package.tar.gz"
+      destination = "package.tar.gz"
  
       connection {
          type        = "ssh"
          user        = "centos"
-         host        = "${element(aws_instance.jfrog_server.*.public_ip, 0)}"
-         private_key = "${file("~/.ssh/aws_adhoc.pem")}"      
-      } 
-    } 
-
-    provisioner "file" {
-      source      = "${path.module}/nginx_packages.sh"
-      destination = "packages.sh"
-      
-      connection {
-         type        = "ssh"
-         user        = "centos"
-         host        = "${element(aws_instance.jfrog_server.*.public_ip, 0)}"
+         host        = "${element(aws_instance.nginx_server.*.public_ip, 0)}"
          private_key = "${file("~/.ssh/aws_adhoc.pem")}"      
       } 
     } 
@@ -95,11 +84,18 @@ resource "aws_instance" "nginx_server" {
       } 
 
     inline = [
-      "chmod +x packages.sh",
-      "./packages.sh"
+      "tar zxvf package.tar.gz",
+      "chmod +x nginx_packages.sh",
+      "./nginx_packages.sh"
     ]
+
   }
 
   tags = merge(var.common_tags, { Name = "${var.common_tags["Purpose"]} Server" })
+
+  depends_on = [
+         aws_instance.jfrog_server,
+  ]
+
 
 }
