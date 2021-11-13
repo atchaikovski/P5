@@ -14,7 +14,8 @@ resource "aws_route53_record" "artifactory" {
   name    = var.jfrog_host_name
   type    = "A"
   ttl     = "300"
-  records = [aws_eip.jfrog_static_ip.public_ip]
+  #records = [aws_eip.jfrog_static_ip.public_ip]
+  records = [aws_instance.jfrog_server.private_ip]
 }
 
 
