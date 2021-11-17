@@ -18,6 +18,8 @@ sudo mkdir /etc/nginx/ssl
 sudo chmod 644 /etc/nginx/ssl
 sudo cp ./server.crt /etc/nginx/ssl/server.crt
 sudo cp ./server.key /etc/nginx/ssl/server.key
+sudo cp ./ca.crt /etc/pki/ca-trust/source/anchors/ca.crt
+sudo update-ca-trust
 sudo cp ./nginx.conf /etc/nginx/nginx.conf
 
 sudo cp ./mynginx.conf /etc/nginx/conf.d/default.conf
