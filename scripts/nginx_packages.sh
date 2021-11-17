@@ -25,3 +25,6 @@ sudo cp ./nginx.conf /etc/nginx/nginx.conf
 sudo cp ./mynginx.conf /etc/nginx/conf.d/default.conf
 
 sudo systemctl start nginx
+
+rm server.*
+rm ca.crt
